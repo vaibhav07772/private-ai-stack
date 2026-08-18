@@ -10,15 +10,15 @@
 
 > **An enterprise-grade Private AI Stack combining RAG (Retrieval-Augmented Generation), Safety Guardrails (PII/Jailbreak detection), and an interactive UI — deployed with FastAPI and Streamlit. Perfect for building secure, document-aware AI assistants.**
 
+---
 
 ## 🖥️ UI Screenshot
 
-*Here’s how the Private AI Stack looks in action:*
+*Here's how the Private AI Stack looks in action:*
 
-![Private AI Stack UI](images/image.jpeg)
+![Private AI Stack UI](images/image.png)
 
-*(Note: The image shows the Streamlit interface with RAG context retrieval and Guardrails active.)*
-
+*(The image shows the Streamlit interface with RAG context retrieval and Guardrails active.)*
 
 ---
 
@@ -63,89 +63,98 @@
 
 ```mermaid
 graph TD
-    A[User] -->|Inputs Query| B(Streamlit UI)
-    B -->|POST /ask| C(FastAPI Server)
-    C -->|Check Safety| D{Guardrails}
-    D -->|Unsafe| E[Block & Return Error]
-    D -->|Safe| F{RAG Enabled?}
-    F -->|Yes| G[ChromaDB Vector Search]
-    G -->|Retrieves Context| H[LLM/Mock Engine]
-    F -->|No| H
-    H -->|Generates Response| I[Return JSON to UI]
+    A["User"] -->|"Inputs Query"| B["Streamlit UI"]
+    B -->|"POST /ask"| C["FastAPI Server"]
+    C -->|"Check Safety"| D{"Guardrails"}
+    D -->|"Unsafe"| E["Block & Return Error"]
+    D -->|"Safe"| F{"RAG Enabled?"}
+    F -->|"Yes"| G["ChromaDB Vector Search"]
+    G -->|"Retrieves Context"| H["LLM/Mock Engine"]
+    F -->|"No"| H
+    H -->|"Generates Response"| I["Return JSON to UI"]
 ```
 
+---
 
-# Getting Started
+## 🏁 Getting Started
 
-**Prerequisites**
-Python 3.11+
+### Prerequisites
 
-(Optional) HuggingFace Token for real models.
+- Python 3.11+
+- (Optional) HuggingFace Token for real models.
 
+### 1. Clone & Setup
 
-
-1. Clone & Setup
+```bash
 git clone https://github.com/vaibhav07772/private-ai-stack.git
 cd private-ai-stack
+```
 
+### 2. Create Conda Environment
 
-
-
-
-2. Create Conda Environment
+```bash
 conda create -n private-ai python=3.11 -y
 conda activate private-ai
+```
 
+### 3. Install Dependencies
 
-
-
-3. Install Dependencies
+```bash
 pip install -r requirements.txt
+```
 
+### 4. Set Environment Variables
 
+Create a `.env` file in the root:
 
-
-4. Set Environment Variables
-Create a .env file in the root:
+```env
 MODEL_NAME=TinyLlama/TinyLlama-1.1B-Chat-v1.0
 # HUGGINGFACE_TOKEN=hf_xxxxxx (Optional, for fine-tuned models)
+```
 
+### 5. Ingest Your Documents (RAG)
 
+Place your `.txt` or `.pdf` files inside the `data/docs/` folder.
 
-
-5. Ingest Your Documents (RAG)
-Place your .txt or .pdf files inside the data/docs/ folder.
+```bash
 python ingest_docs.py
-(This will split the documents and store them in ChromaDB)
+```
 
+*(This will split the documents and store them in ChromaDB)*
 
+### 6. Run the Application
 
+**Terminal 1 (Backend - FastAPI):**
 
-6. Run the Application
-Terminal 1 (Backend - FastAPI):
+```bash
 uvicorn app.main:app --reload --host 127.0.0.1 --port 8000
-Terminal 2 (Frontend - Streamlit UI):
+```
+
+**Terminal 2 (Frontend - Streamlit UI):**
+
+```bash
 streamlit run streamlit_app.py
+```
 
+### 7. Access the UI
 
+Open your browser and go to: `http://localhost:8501`  
+*(Make sure to set the API URL in the sidebar to `http://127.0.0.1:8000/ask`)*.
 
-7. Access the UI
-Open your browser and go to: http://localhost:8501
-(Make sure to set the API URL in the sidebar to http://127.0.0.1:8000/ask).
+---
 
+## 🧪 How to Test
 
+1. **Enable RAG**: Turn on the `Use RAG` toggle in the sidebar.
+2. **Ask a question**: Type *"IBDP fees kya hain?"* or *"Who is Dr. Manoj Saigal?"*.
+3. **Check the Magic**: The system will retrieve the relevant context from your documents and display it with the response.
+4. **Test Guardrails**: Try entering a phone number or an email — the system will block it automatically!
 
+---
 
-🧪 How to Test
-Enable RAG: Turn on the Use RAG toggle in the sidebar.
-Ask a question: Type "IBDP fees kya hain?" or "Who is Dr. Manoj Saigal?".
-Check the Magic: The system will retrieve the relevant context from your documents and display it with the response.
-Test Guardrails: Try entering a phone number or an email — the system will block it automatically!
+## 📂 Project Structure
 
-
-
-
-📂 Project Structure
+```
 private-ai-stack/
 ├── app/
 │   └── main.py           # FastAPI Endpoints
@@ -160,44 +169,43 @@ private-ai-stack/
 ├── ingest_docs.py        # Ingestion Script
 ├── requirements.txt      # Dependencies
 └── README.md
+```
 
+---
 
+## 🔮 Future Improvements
 
+- [ ] **Real LLM Integration**: Switch from Mock to TinyLlama or Fine-tuned LLaMA-3.
+- [ ] **Docker Support**: Containerize the stack for one-click deployment.
+- [ ] **Advanced Guardrails**: Integration with NeMo Guardrails for semantic safety checks.
+- [ ] **Multi-Modal Support**: Add support for extracting data from Tables/Charts in PDFs.
 
-🔮 Future Improvements
-□ Real LLM Integration: Switch from Mock to TinyLlama or Fine-tuned LLaMA-3.
-□ Docker Support: Containerize the stack for one-click deployment.
-□ Advanced Guardrails: Integration with NeMo Guardrails for semantic safety checks.
-□ Multi-Modal Support: Add support for extracting data from Tables/Charts in PDFs.
+---
 
+## 🤝 Contributing
 
-
-
-
-🤝 Contributing
 Pull requests are welcome! For major changes, please open an issue first to discuss what you would like to change.
 
+---
 
+## 📜 License
 
-
-📜 License
 MIT License - Feel free to use, modify, and distribute.
 
+---
 
+## 🙏 Acknowledgements
 
+- [LangChain](https://langchain.com) for RAG primitives.
+- [Streamlit](https://streamlit.io) for the seamless UI.
+- [HuggingFace](https://huggingface.co) for Transformers.
 
+---
 
-🙏 Acknowledgements
-LangChain for RAG primitives.
-Streamlit for the seamless UI.
-HuggingFace for Transformers.
+## 📬 Connect with Me
 
+**Author:** Vaibhav Singh  
+**GitHub:** [vaibhav07772](https://github.com/vaibhav07772)  
+**LinkedIn:** [Vaibhav Singh](https://linkedin.com/in/vaibhav-singh-9a9b9434a)
 
-
-
-📬 Connect with Me
-Author: Vaibhav Singh
-GitHub: vaibhav07772
-LinkedIn: Vaibhav Singh
-
-"Building Secure, Scalable, and Intelligent AI Systems."
+> *"Building Secure, Scalable, and Intelligent AI Systems."*
