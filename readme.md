@@ -75,59 +75,60 @@ graph TD
 
 
 
-🏁 Getting Started
-Prerequisites
+# Getting Started
+
+**Prerequisites**
 Python 3.11+
 
 (Optional) HuggingFace Token for real models.
 
+
 1. Clone & Setup
-bash
 git clone https://github.com/vaibhav07772/private-ai-stack.git
 cd private-ai-stack
 
+
 2. Create Conda Environment
-bash
 conda create -n private-ai python=3.11 -y
 conda activate private-ai
 
+
 3. Install Dependencies
-bash
 pip install -r requirements.txt
+
 
 4. Set Environment Variables
 Create a .env file in the root:
-env
 MODEL_NAME=TinyLlama/TinyLlama-1.1B-Chat-v1.0
 # HUGGINGFACE_TOKEN=hf_xxxxxx (Optional, for fine-tuned models)
 
+
 5. Ingest Your Documents (RAG)
 Place your .txt or .pdf files inside the data/docs/ folder.
-bash
 python ingest_docs.py
 (This will split the documents and store them in ChromaDB)
 
+
 6. Run the Application
 Terminal 1 (Backend - FastAPI):
-bash
 uvicorn app.main:app --reload --host 127.0.0.1 --port 8000
-Terminal 2 (Frontend - Streamlit UI):
 
-bash
+Terminal 2 (Frontend - Streamlit UI):
 streamlit run streamlit_app.py
+
 
 7. Access the UI
 Open your browser and go to: http://localhost:8501
 (Make sure to set the API URL in the sidebar to http://127.0.0.1:8000/ask).
 
+
 🧪 How to Test
 Enable RAG: Turn on the Use RAG toggle in the sidebar.
-
 Ask a question: Type "IBDP fees kya hain?" or "Who is Dr. Manoj Saigal?".
-
 Check the Magic: The system will retrieve the relevant context from your documents and display it with the response.
-
 Test Guardrails: Try entering a phone number or an email — the system will block it automatically!
+
+
 
 📂 Project Structure
 private-ai-stack/
@@ -162,11 +163,10 @@ Pull requests are welcome! For major changes, please open an issue first to disc
 MIT License - Feel free to use, modify, and distribute.
 
 
+
 🙏 Acknowledgements
 LangChain for RAG primitives.
-
 Streamlit for the seamless UI.
-
 HuggingFace for Transformers.
 
 
