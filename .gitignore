@@ -1,0 +1,51 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+venv/
+env/
+ENV/
+.venv/
+
+# Env & Secrets
+.env
+service_key.json
+*.pem
+*.key
+
+# Data & Vector DB (ChromaDB)
+data/chroma_db/
+data/docs/*.pdf
+data/docs/*.txt
+!data/docs/.gitkeep
+
+# Fine-tuning datasets (large files)
+*.json
+*.csv
+*.parquet
+
+# IDE / OS
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+*.log
+
+# Streamlit
+.streamlit/secrets.toml
+
+# Misc
+*.patch
+*.diff
+outputs/
+runs/
+wandb/

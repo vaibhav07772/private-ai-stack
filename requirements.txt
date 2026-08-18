@@ -1,0 +1,15 @@
+fastapi
+uvicorn
+streamlit
+python-dotenv
+chromadb
+sentence-transformers
+pypdf
+langchain-community
+langchain-huggingface
+langchain-text-splitters
+langchain-chroma
+transformers
+accelerate
+bitsandbytes
+torch
