@@ -72,7 +72,7 @@ graph TD
     G -->|Retrieves Context| H[LLM/Mock Engine]
     F -->|No| H
     H -->|Generates Response| I[Return JSON to UI]
-
+```
 
 
 # Getting Started
